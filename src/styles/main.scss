@@ -1,0 +1,19 @@
+@use 'variables' as *;
+@use 'reset';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $spacing-6;
+
+  @media (max-width: $bp-mobile) {
+    padding: 0 $spacing-4;
+  }
+}
+
+.page {
+  padding-top: $nav-height;
+  min-height: 100vh;
+}
