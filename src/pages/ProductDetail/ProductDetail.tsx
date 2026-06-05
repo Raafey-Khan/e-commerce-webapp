@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
-import { useProduct } from '../../hooks/useProduct';
+import { useFetch } from '../../hooks/useFetch';
 import { getVariantsForProduct } from '../../data/variants';
 import { VariantSelector } from '../../components/VariantSelector/VariantSelector';
 import { QuantityPicker } from '../../components/QuantityPicker/QuantityPicker';
 import { useCart } from '../../stores/CartContext';
-import type { SelectedVariant } from '../../types';
+import type { SelectedVariant, Product } from '../../types';
 import styles from './ProductDetail.module.scss';
 
 function StarRating({ rate }: { rate: number }) {
@@ -41,7 +41,8 @@ function SkeletonDetail() {
 export function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { product, loading, error } = useProduct(id);
+  const url = id ? `https://fakestoreapi.com/products/${id}` : null;
+  const { data: product, loading, error } = useFetch<Product>(url);
   const { addItem, openCart } = useCart();
 
   const [quantity, setQuantity] = useState(1);

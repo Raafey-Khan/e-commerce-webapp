@@ -1,5 +1,6 @@
-import { useProducts } from '../../hooks/useProducts';
+import { useFetch } from '../../hooks/useFetch';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
+import type { Product } from '../../types';
 import styles from './ProductList.module.scss';
 
 function SkeletonCard() {
@@ -16,14 +17,14 @@ function SkeletonCard() {
 }
 
 export function ProductList() {
-  const { products, loading, error } = useProducts();
+  const { data: products, loading, error } = useFetch<Product[]>('https://fakestoreapi.com/products');
 
   return (
     <main className={styles.page}>
       <div className={styles.header}>
         <h1 className={styles.heading}>All Products</h1>
         {!loading && !error && (
-          <p className={styles.subheading}>{products.length} items</p>
+          <p className={styles.subheading}>{products?.length} items</p>
         )}
       </div>
 
@@ -38,7 +39,7 @@ export function ProductList() {
         <div className={styles.grid}>
           {loading
             ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
-            : products.map((product) => (
+            : (products ?? []).map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
         </div>
