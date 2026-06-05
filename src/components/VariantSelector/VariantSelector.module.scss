@@ -1,0 +1,114 @@
+@use '../../styles/variables' as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $fw-medium;
+  color: $color-text-secondary;
+
+  span {
+    color: $color-text-primary;
+    font-weight: $fw-semibold;
+  }
+}
+
+.colorList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-2;
+}
+
+.colorSwatch {
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-full;
+  border: 2px solid transparent;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: outline-color $transition-fast, border-color $transition-fast;
+  cursor: pointer;
+  position: relative;
+
+  &.selected {
+    outline-color: $color-accent;
+  }
+
+  &:hover:not(.selected) {
+    outline-color: $color-border;
+  }
+}
+
+.sizeList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-2;
+}
+
+.sizeBtn {
+  position: relative;
+  min-width: 48px;
+  height: 40px;
+  padding: 0 $spacing-3;
+  border: 1.5px solid $color-border;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  font-weight: $fw-medium;
+  color: $color-text-primary;
+  background: $color-surface;
+  transition: border-color $transition-fast, background $transition-fast, color $transition-fast;
+  cursor: pointer;
+
+  &:hover:not(.soldOut):not(.selected) {
+    border-color: $color-accent;
+  }
+
+  &.selected {
+    border-color: $color-accent;
+    background: $color-accent;
+    color: #fff;
+  }
+
+  &.lowStock {
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: $radius-full;
+      background: $color-warning;
+    }
+  }
+
+  &.soldOut {
+    color: $color-text-muted;
+    border-color: $color-border;
+    cursor: not-allowed;
+    text-decoration: line-through;
+    opacity: 0.5;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: $color-text-muted;
+      transform: translateY(-50%) rotate(-15deg);
+    }
+  }
+}
+
+.stockHint {
+  font-size: $font-size-xs;
+  color: $color-warning;
+  font-weight: $fw-medium;
+}
