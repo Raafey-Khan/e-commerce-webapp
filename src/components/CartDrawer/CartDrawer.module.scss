@@ -1,0 +1,261 @@
+@use '../../styles/variables' as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: $color-overlay;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $transition-slow;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: $drawer-width;
+  max-width: 100vw;
+  height: 100vh;
+  background: $color-surface;
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform $transition-slow;
+  box-shadow: $shadow-lg;
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  @media (max-width: $bp-mobile) {
+    width: 100vw;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-5 $spacing-6;
+  border-bottom: 1px solid $color-border;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: $font-size-lg;
+  font-weight: $fw-semibold;
+}
+
+.closeBtn {
+  padding: $spacing-2;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  transition: background $transition-fast, color $transition-fast;
+
+  &:hover {
+    background: $color-border;
+    color: $color-text-primary;
+  }
+
+  svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-4 $spacing-6;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: $spacing-3;
+  color: $color-text-muted;
+
+  svg {
+    width: 48px;
+    height: 48px;
+    opacity: 0.3;
+  }
+
+  p {
+    font-size: $font-size-sm;
+  }
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: $spacing-3;
+  padding-bottom: $spacing-4;
+  border-bottom: 1px solid $color-border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  background: $color-bg;
+  border: 1px solid $color-border;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: $spacing-1;
+  }
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-1;
+  min-width: 0;
+}
+
+.itemName {
+  font-size: $font-size-sm;
+  font-weight: $fw-medium;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemVariant {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.itemPrice {
+  font-size: $font-size-sm;
+  font-weight: $fw-semibold;
+  margin-top: auto;
+}
+
+.itemActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: $spacing-2;
+}
+
+.qtyControl {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  overflow: hidden;
+}
+
+.qtyBtn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-lg;
+  color: $color-text-secondary;
+  transition: background $transition-fast;
+  line-height: 1;
+
+  &:hover:not(:disabled) {
+    background: $color-bg;
+    color: $color-text-primary;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+.qtyValue {
+  font-size: $font-size-sm;
+  font-weight: $fw-medium;
+  min-width: 20px;
+  text-align: center;
+}
+
+.removeBtn {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  text-decoration: underline;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-danger;
+  }
+}
+
+.footer {
+  border-top: 1px solid $color-border;
+  padding: $spacing-5 $spacing-6;
+  flex-shrink: 0;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+  margin-bottom: $spacing-5;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: $font-size-base;
+  font-weight: $fw-semibold;
+  color: $color-text-primary;
+  padding-top: $spacing-3;
+  border-top: 1px solid $color-border;
+}
+
+.checkoutBtn {
+  width: 100%;
+  padding: $spacing-4;
+  background: $color-accent;
+  color: #fff;
+  font-size: $font-size-base;
+  font-weight: $fw-semibold;
+  border-radius: $radius-md;
+  transition: background $transition-fast;
+  letter-spacing: 0.01em;
+
+  &:hover {
+    background: $color-accent-hover;
+  }
+}

@@ -1,0 +1,73 @@
+@use '../../styles/variables' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $nav-height;
+  background: $color-surface;
+  border-bottom: 1px solid $color-border;
+  z-index: 100;
+}
+
+.inner {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $spacing-6;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: $bp-mobile) {
+    padding: 0 $spacing-4;
+  }
+}
+
+.logo {
+  font-size: $font-size-xl;
+  font-weight: $fw-bold;
+  letter-spacing: -0.02em;
+  color: $color-text-primary;
+
+  &:hover {
+    color: $color-text-secondary;
+  }
+}
+
+.cartBtn {
+  position: relative;
+  padding: $spacing-2;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $color-border;
+  }
+
+  svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 $spacing-1;
+  background: $color-accent;
+  color: #fff;
+  font-size: 10px;
+  font-weight: $fw-bold;
+  border-radius: $radius-full;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
