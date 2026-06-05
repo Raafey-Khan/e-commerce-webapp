@@ -1,0 +1,125 @@
+@use '../../styles/variables' as *;
+
+.page {
+  padding-top: $nav-height;
+  min-height: 100vh;
+}
+
+.header {
+  padding: $spacing-10 $spacing-6 $spacing-6;
+  max-width: $container-max;
+  margin: 0 auto;
+
+  @media (max-width: $bp-mobile) {
+    padding: $spacing-8 $spacing-4 $spacing-4;
+  }
+}
+
+.heading {
+  font-size: $font-size-3xl;
+  font-weight: $fw-bold;
+  letter-spacing: -0.03em;
+
+  @media (max-width: $bp-mobile) {
+    font-size: $font-size-2xl;
+  }
+}
+
+.subheading {
+  margin-top: $spacing-2;
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+}
+
+.grid {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $spacing-6 $spacing-16;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-6;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 $spacing-4 $spacing-10;
+    gap: $spacing-3;
+  }
+
+  @media (max-width: 420px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skeletonCard {
+  border-radius: $radius-lg;
+  overflow: hidden;
+  background: $color-surface;
+  border: 1px solid $color-border;
+}
+
+.skeletonImg {
+  width: 100%;
+  padding-top: 100%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeletonBody {
+  padding: $spacing-4;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.skeletonLine {
+  height: 14px;
+  border-radius: $radius-sm;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+
+  &.short {
+    width: 60%;
+  }
+
+  &.medium {
+    width: 80%;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.error {
+  max-width: $container-max;
+  margin: $spacing-12 auto;
+  padding: 0 $spacing-6;
+  text-align: center;
+  color: $color-danger;
+
+  p {
+    font-size: $font-size-base;
+    margin-bottom: $spacing-4;
+  }
+}
+
+.retryBtn {
+  padding: $spacing-3 $spacing-6;
+  background: $color-accent;
+  color: #fff;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  font-weight: $fw-medium;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $color-accent-hover;
+  }
+}
