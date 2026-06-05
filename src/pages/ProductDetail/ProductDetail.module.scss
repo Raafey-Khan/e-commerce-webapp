@@ -1,0 +1,351 @@
+@use '../../styles/variables' as *;
+
+.page {
+  padding-top: $nav-height;
+  min-height: 100vh;
+}
+
+.inner {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: $spacing-8 $spacing-6 $spacing-16;
+
+  @media (max-width: $bp-mobile) {
+    padding: $spacing-5 $spacing-4 $spacing-10;
+  }
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  margin-bottom: $spacing-6;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+
+  a {
+    color: $color-text-muted;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-text-primary;
+    }
+  }
+
+  span {
+    color: $color-text-secondary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 240px;
+  }
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-12;
+  align-items: start;
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+    gap: $spacing-6;
+  }
+}
+
+// — Gallery —
+.gallery {
+  position: sticky;
+  top: calc($nav-height + $spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+
+  @media (max-width: $bp-mobile) {
+    position: static;
+  }
+}
+
+.mainImage {
+  aspect-ratio: 1 / 1;
+  background: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-8;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity $transition-base;
+  }
+}
+
+.thumbnails {
+  display: flex;
+  gap: $spacing-2;
+  overflow-x: auto;
+  padding-bottom: $spacing-1;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.thumb {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: $radius-sm;
+  border: 2px solid $color-border;
+  overflow: hidden;
+  background: $color-bg;
+  padding: $spacing-1;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+
+  &.active {
+    border-color: $color-accent;
+  }
+
+  &:hover:not(.active) {
+    border-color: $color-text-muted;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+// — Info panel —
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-5;
+}
+
+.category {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: $fw-medium;
+}
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: $fw-bold;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+
+  @media (max-width: $bp-mobile) {
+    font-size: $font-size-xl;
+  }
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+}
+
+.salePrice {
+  font-size: $font-size-2xl;
+  font-weight: $fw-bold;
+  color: $color-danger;
+}
+
+.originalPrice {
+  font-size: $font-size-lg;
+  color: $color-text-muted;
+  text-decoration: line-through;
+}
+
+.price {
+  font-size: $font-size-2xl;
+  font-weight: $fw-bold;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  width: 14px;
+  height: 14px;
+  fill: #f5a623;
+}
+
+.starEmpty {
+  fill: $color-border;
+}
+
+.divider {
+  height: 1px;
+  background: $color-border;
+}
+
+.variants {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-5;
+}
+
+.qtyRow {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.qtyLabel {
+  font-size: $font-size-sm;
+  font-weight: $fw-medium;
+  color: $color-text-secondary;
+}
+
+.ctaRow {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+}
+
+.addToCartBtn {
+  width: 100%;
+  padding: $spacing-4;
+  background: $color-accent;
+  color: #fff;
+  font-size: $font-size-base;
+  font-weight: $fw-semibold;
+  border-radius: $radius-md;
+  transition: background $transition-fast, opacity $transition-fast;
+  letter-spacing: 0.01em;
+
+  &:hover:not(:disabled) {
+    background: $color-accent-hover;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &.loading {
+    opacity: 0.7;
+  }
+}
+
+.soldOutMsg {
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $color-danger;
+  font-weight: $fw-medium;
+}
+
+.description {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: 1.7;
+}
+
+// Skeleton
+.skeleton {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: $spacing-8 $spacing-6;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-12;
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+    padding: $spacing-5 $spacing-4;
+    gap: $spacing-6;
+  }
+}
+
+.skeletonSquare {
+  aspect-ratio: 1;
+  border-radius: $radius-lg;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeletonLines {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+  padding-top: $spacing-4;
+}
+
+.skeletonLine {
+  height: 16px;
+  border-radius: $radius-sm;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+
+  &.w30 { width: 30%; }
+  &.w50 { width: 50%; }
+  &.w70 { width: 70%; }
+  &.w100 { width: 100%; }
+  &.tall { height: 48px; }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.errorState {
+  max-width: $container-max;
+  margin: $spacing-12 auto;
+  padding: 0 $spacing-6;
+  text-align: center;
+
+  h2 {
+    font-size: $font-size-xl;
+    font-weight: $fw-semibold;
+    margin-bottom: $spacing-3;
+  }
+
+  p {
+    color: $color-text-secondary;
+    margin-bottom: $spacing-6;
+  }
+
+  a {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    text-decoration: underline;
+  }
+}
+
+.addedFeedback {
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $color-success;
+  font-weight: $fw-medium;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
