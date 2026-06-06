@@ -282,9 +282,18 @@
 .skeletonSquare {
   aspect-ratio: 1;
   border-radius: $radius-lg;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.4s infinite;
+  background: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
+    transform: translateX(-100%);
+    animation: shimmer 1.4s infinite;
+  }
 }
 
 .skeletonLines {
@@ -297,9 +306,18 @@
 .skeletonLine {
   height: 16px;
   border-radius: $radius-sm;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.4s infinite;
+  background: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
+    transform: translateX(-100%);
+    animation: shimmer 1.4s infinite;
+  }
 
   &.w30 { width: 30%; }
   &.w50 { width: 50%; }
@@ -309,8 +327,7 @@
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  100% { transform: translateX(100%); }
 }
 
 .errorState {

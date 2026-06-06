@@ -39,8 +39,8 @@ export function ProductList() {
         <div className={styles.grid}>
           {loading
             ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
-            : (products ?? []).map((product) => (
-                <ProductCard key={product.id} product={product} />
+            : (products ?? []).map((product, i) => (
+                <ProductCard key={product.id} product={product} priority={i < 2} />
               ))}
         </div>
       )}

@@ -6,11 +6,11 @@ import { getVariantsForProduct } from '../../data/variants';
 import styles from './ProductCard.module.scss';
 
 interface Props {
-
   product: Product;
+  priority?: boolean;
 }
 
-export function ProductCard({ product }: Props) {
+export function ProductCard({ product, priority = false }: Props) {
 
   const { addItem, openCart } = useCart();
   const [adding, setAdding] = useState(false);
@@ -47,7 +47,7 @@ export function ProductCard({ product }: Props) {
     <article className={styles.card}>
       <Link to={`/product/${product.id}`} className={styles.imageLink} aria-label={product.title}>
 
-        <img src={product.image} alt={product.title} className={styles.image} loading="lazy" />
+        <img src={product.image} alt={product.title} className={styles.image} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : 'auto'} />
       </Link>
 
       <div className={styles.body}>
