@@ -1,15 +1,19 @@
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import { Navbar } from '../components/Navbar/Navbar';
 import { CartDrawer } from '../components/CartDrawer/CartDrawer';
-import { ProductList } from '../pages/ProductList/ProductList';
-import { ProductDetail } from '../pages/ProductDetail/ProductDetail';
+
+const ProductList = lazy(() => import('../pages/ProductList/ProductList').then(m => ({ default: m.ProductList })));
+const ProductDetail = lazy(() => import('../pages/ProductDetail/ProductDetail').then(m => ({ default: m.ProductDetail })));
 
 function Layout() {
   return (
     <>
       <Navbar />
       <CartDrawer />
-      <Outlet />
+      <Suspense fallback={null}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }
