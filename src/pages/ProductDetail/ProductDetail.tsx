@@ -39,14 +39,19 @@ function SkeletonDetail() {
 }
 
 export function ProductDetail() {
+
+
   const { id } = useParams<{ id: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
+
   const url = id ? `https://fakestoreapi.com/products/${id}` : null;
   const { data: product, loading, error } = useFetch<Product>(url);
   const { addItem, openCart } = useCart();
 
   const [quantity, setQuantity] = useState(1);
+
   const [activeImage, setActiveImage] = useState(0);
+
   const [addStatus, setAddStatus] = useState<'idle' | 'adding' | 'added'>('idle');
 
   const [selected, setSelected] = useState<SelectedVariant>({
@@ -55,9 +60,13 @@ export function ProductDetail() {
   });
 
   useEffect(() => {
+
     if (!product) return;
+
     const variants = getVariantsForProduct(product);
+
     const defaultColor = searchParams.get('color') ?? variants.colors[0].name;
+
     const defaultSize =
         searchParams.get('size') ??
         (variants.sizes.find((s) => s.status !== 'sold-out')?.label ?? variants.sizes[0].label);
@@ -65,11 +74,15 @@ export function ProductDetail() {
   }, [product]);
 
   useEffect(() => {
+
     if (!selected.color && !selected.size) return;
+
     const next = new URLSearchParams(searchParams);
+
     if (selected.color) next.set('color', selected.color);
     if (selected.size) next.set('size', selected.size);
     setSearchParams(next, { replace: true });
+
   }, [selected.color, selected.size]);
 
   if (loading) return <main className={styles.page}><SkeletonDetail /></main>;
@@ -87,17 +100,23 @@ export function ProductDetail() {
   }
 
   const variants = getVariantsForProduct(product);
+
   const selectedSizeObj = variants.sizes.find((s) => s.label === selected.size);
+
   const isSoldOut = selectedSizeObj?.status === 'sold-out';
 
   const thumbnails = [product.image, product.image, product.image];
 
   function handleVariantChange(partial: Partial<SelectedVariant>) {
+
     setSelected((prev) => ({ ...prev, ...partial }));
+
   }
 
   async function handleAddToCart() {
+
     if (!product || isSoldOut || addStatus !== 'idle') return;
+
     setAddStatus('adding');
 
     await new Promise<void>((resolve, reject) => {
@@ -115,9 +134,13 @@ export function ProductDetail() {
     addItem({
         productId: product.id,
         title: product.title,
+
         image: product.image,
+
         price: variants.salePrice ?? product.price,
+
         color: selected.color,
+        
         size: selected.size,
         quantity,
     });
@@ -128,7 +151,9 @@ export function ProductDetail() {
   }
 
   return (
+
     <main className={styles.page}>
+
       <div className={styles.inner}>
         <nav className={styles.breadcrumb} aria-label="Breadcrumb">
           <Link to="/">All Products</Link>
@@ -138,6 +163,7 @@ export function ProductDetail() {
 
         <div className={styles.layout}>
           <div className={styles.gallery}>
+
             <div className={styles.mainImage}>
               <img
                 src={thumbnails[activeImage]}
@@ -176,31 +202,45 @@ export function ProductDetail() {
             </div>
 
             <div className={styles.rating}>
+              
               <StarRating rate={product.rating.rate} />
+
               <span>{product.rating.rate} ({product.rating.count} reviews)</span>
             </div>
 
             <div className={styles.divider} />
 
             <div className={styles.variants}>
+
               <VariantSelector
+
                 colors={variants.colors}
+
                 sizes={variants.sizes}
+
                 selected={selected}
+
                 onChange={handleVariantChange}
+
               />
             </div>
 
             <div className={styles.qtyRow}>
+
               <p className={styles.qtyLabel}>Quantity</p>
+
               <QuantityPicker value={quantity} onChange={setQuantity} />
+
             </div>
 
             <div className={styles.ctaRow}>
               <button
                 className={`${styles.addToCartBtn} ${addStatus === 'adding' ? styles.loading : ''}`}
+
                 onClick={handleAddToCart}
+
                 disabled={isSoldOut || addStatus === 'adding'}
+
               >
                 {isSoldOut
                   ? 'Sold Out'
@@ -209,13 +249,16 @@ export function ProductDetail() {
                     : 'Add to Cart'}
               </button>
               {isSoldOut && <p className={styles.soldOutMsg}>This size is currently unavailable</p>}
+
               {addStatus === 'added' && <p className={styles.addedFeedback}>Added to cart!</p>}
             </div>
 
             <div className={styles.divider} />
 
             <p className={styles.description}>{product.description}</p>
+
           </div>
+
         </div>
       </div>
     </main>

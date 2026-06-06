@@ -6,14 +6,17 @@ import { getVariantsForProduct } from '../../data/variants';
 import styles from './ProductCard.module.scss';
 
 interface Props {
+
   product: Product;
 }
 
 export function ProductCard({ product }: Props) {
+
   const { addItem, openCart } = useCart();
   const [adding, setAdding] = useState(false);
 
   const variants = getVariantsForProduct(product);
+
   const displayPrice = variants.salePrice ?? product.price;
 
   function handleQuickAdd(e: React.MouseEvent) {
@@ -32,6 +35,7 @@ export function ProductCard({ product }: Props) {
         price: displayPrice,
         color: variants.colors[0].name,
         size: firstAvailableSize.label,
+
         quantity: 1,
       });
       openCart();
@@ -42,6 +46,7 @@ export function ProductCard({ product }: Props) {
   return (
     <article className={styles.card}>
       <Link to={`/product/${product.id}`} className={styles.imageLink} aria-label={product.title}>
+
         <img src={product.image} alt={product.title} className={styles.image} loading="lazy" />
       </Link>
 
@@ -49,14 +54,18 @@ export function ProductCard({ product }: Props) {
         <p className={styles.category}>{product.category}</p>
         <Link to={`/product/${product.id}`} className={styles.name}>
           {product.title}
+
         </Link>
       </div>
 
       <div className={styles.footer}>
+
         <span className={styles.price}>${displayPrice.toFixed(2)}</span>
+        
         <button
           className={`${styles.addBtn} ${adding ? styles.adding : ''}`}
           onClick={handleQuickAdd}
+
           disabled={adding}
         >
           {adding ? 'Adding...' : 'Add to Cart'}
