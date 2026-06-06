@@ -2,16 +2,16 @@
 
 Built this for the Nua frontend assessment. React 18 + TypeScript + SCSS modules + Vite.
 
-**Live URL:** _(will add after deploying)_
+**Live URL:** https://e-commerce-webapp-a3xu4jian-raafey-khans-projects.vercel.app/
 
----
+**Repo:** https://github.com/Raafey-Khan/e-commerce-webapp
 
 ## How to run
 
 Need Node 18+
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/Raafey-Khan/e-commerce-webapp.git
 cd e-commerce-webapp
 npm install
 npm run dev
@@ -22,9 +22,8 @@ Should open on [http://localhost:5173](http://localhost:5173)
 ```bash
 npm run build    # prod build
 npm run preview  # preview the build
+npm test         # run unit tests
 ```
-
----
 
 ## Stack choices
 
@@ -37,8 +36,6 @@ npm run preview  # preview the build
 | React Router v6 | needed for routing + search params for variant state in URL |
 | Context API + useReducer | cart state doesnt need Redux, context is enough here |
 
----
-
 ## Key decisions
 
 See [DECISIONS.md](./DECISIONS.md) — covers the main architectural choices and what I'd change.
@@ -48,8 +45,6 @@ See [DECISIONS.md](./DECISIONS.md) — covers the main architectural choices and
 **On variants:** Fake Store API doesnt have colour or size data so I generate it per category — clothing gets apparel sizes and colours, jewellery gets ring sizes, electronics gets storage options. Some products get a sale price too (seeded from product id).
 
 **On localStorage:** Cart hydrates on mount before first render so there's no flash of empty state. Writes are gated behind a hydrated flag so initial load doesnt overwrite whats saved.
-
----
 
 ## Known issues / trade-offs
 
